@@ -1,4 +1,80 @@
-import { of, from } from 'rxjs';
+import { of, from, interval, timer, fromEvent } from 'rxjs';
+import { ajax } from "rxjs/ajax";
+import { map } from "rxjs/operators";
+
+
+console.log('START Map Operator')
+
+//map operator transform the data emitted by observable
+
+const observableMapOperator = of(1,2,3,4,5);
+
+const doubleObservableOperator = observableMapOperator.pipe(
+    map(item=>item * 2)
+)
+
+
+doubleObservableOperator.subscribe({
+    next: (data) => console.log(data)
+})
+
+console.log('END Map Operator')
+
+//----------------------------------------------------------------------------------------------------------------
+
+console.log('START Ajax')
+
+const observableAjaxOperation = ajax.get('https://jsonplaceholder.typicode.com/todos');
+
+observableAjaxOperation.subscribe({
+    next: (data)=> console.log(data.response),
+    error: (error)=> console.log(error),
+    complete: () => console.log('Complete')
+})
+
+console.log('END Ajax')
+
+// --------------------------------------------------------------------------------------------------------------
+
+console.log('START FormEvent');
+
+// The fromEvent operator is a powerful tool for handling user interactions in reactive and event-driven web applications.
+
+const button:any = document.getElementById('myButton');
+
+const observableFromEvent = fromEvent(button, 'click');
+
+observableFromEvent.subscribe(event => console.log('button clicked'))
+
+// -----------------------------------------------------------------------------------------------
+
+
+console.log('START timer')
+
+// The timer operator is useful when you need to introduce time delays into your observables, either for a single emission or for periodic emissions after an initial delay.
+
+const observableTimer = timer(2000, 1000);
+observableTimer.subscribe({
+    next: (data) => console.log('Interval '+data)
+})
+
+console.log('END Interval')
+// -----------------------------------------------------------------------------------------------------
+
+console.log('START Interval Operator');
+
+// The interval operator in RxJS is a creation operator that emits sequential numbers at specified time intervals
+
+const observableInterval = interval(1000);
+
+observableInterval.subscribe({
+    next: (data) => console.log(data)
+});
+
+//The interval operator is useful when you need to perform actions at regular time intervals or when you want to create periodic events in your application
+
+// ----------------------------------------------------------------------------------------------------
+console.log('START From Operator');
 
 // From Operator
 
@@ -25,11 +101,11 @@ observableFromPromise.subscribe(console.log);
 observableFromString.subscribe(console.log);
 observableFromSet.subscribe(console.log)
 
-
+// it creates an observable from an array, an array-like object, a Promise, an iterable object, or an Observable-like object.
 
 
 // -------------------------------------------------------------------------------------------------------------------
-
+console.log('START of Operator');
 // off Operator 
 
 const observable = of(1,2,3,4,5);
@@ -39,7 +115,7 @@ observable.subscribe({
     complete: () => console.log('Complete')
 })
 
-//The of operator is useful when you want to create an observable sequence from a fixed set of values or when you want to emit specific values in a sequence.
+// The of operator is useful when you want to create an observable sequence from a fixed set of values 
 
 
 // const obs = of(1,2,3,4,5).pipe(
