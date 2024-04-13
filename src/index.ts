@@ -1,7 +1,23 @@
-import { of, from, interval, timer, fromEvent } from 'rxjs';
+import { of, from, interval, timer, fromEvent, Subject } from 'rxjs';
 import { ajax } from "rxjs/ajax";
 import { map } from "rxjs/operators";
 
+
+// Subject
+
+const subject = new Subject<number>();
+
+
+subject.subscribe({
+    next: (v) => console.log(`Observer A ${v}`)
+})
+subject.subscribe({
+    next: (v) => console.log(`Observer B ${v}`)
+})
+
+const observableFrom = from([1,2,3])
+
+observableFrom.subscribe(subject)
 
 console.log('START Map Operator')
 
