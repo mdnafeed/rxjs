@@ -1,5 +1,68 @@
-import { Observable } from 'rxjs'
+import { of, from } from 'rxjs';
 
+// From Operator
+
+// Example with a Array
+const array = [1,2,3,4,5];
+const observableFromArray = from(array);
+
+// Example with a promise 
+const promise = new Promise((resolve)=> console.log(resolve('i am resolve')));
+const observableFromPromise = from(promise);
+
+// Example with a string
+const string = "Nafeed Akram";
+const observableFromString = from(string);
+
+// Example with a set
+const set = new Set([11,22,33,44]);
+const observableFromSet = from(set);
+
+
+// subscribe to the observable
+observableFromArray.subscribe(console.log);
+observableFromPromise.subscribe(console.log);
+observableFromString.subscribe(console.log);
+observableFromSet.subscribe(console.log)
+
+
+
+
+// -------------------------------------------------------------------------------------------------------------------
+
+// off Operator 
+
+const observable = of(1,2,3,4,5);
+
+observable.subscribe({
+    next: (data) => console.log(data),
+    complete: () => console.log('Complete')
+})
+
+//The of operator is useful when you want to create an observable sequence from a fixed set of values or when you want to emit specific values in a sequence.
+
+
+// const obs = of(1,2,3,4,5).pipe(
+//     map(item => item * 10)
+// )
+
+// obs.subscribe({
+//     next: (data) => console.log(data)
+// })
+
+// const pr1 = new Promise(resolve =>{ resolve('i am promise1')});
+// const pr2 = new Promise(resolve =>{ resolve('i am promise2')});
+// const pr3 = new Promise(resolve =>{ resolve('i am promise3')});
+
+// let array = [1,2,3,4]
+// // const obs = from([pr1,pr2,pr3]);
+
+// const obs = from('Hello')
+
+// obs.subscribe({
+//     next: (data) =>{console.log(data)},
+//     complete: () => console.log('complete')
+// })
 
 // function http(consumer:any,isPromise = false){
 
